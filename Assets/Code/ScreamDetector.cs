@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum MotionType { precise, physics };
+
 [RequireComponent(typeof(AudioSource))]
 
 public class ScreamDetector : MonoBehaviour
@@ -10,9 +12,11 @@ public class ScreamDetector : MonoBehaviour
 
     public float m_sensitivity;
     public GameObject m_startingPosition;
+    public MotionType m_type = MotionType.precise;
 
     private AudioSource m_audio;
     private PersistentData m_pData;
+    private Rigidbody m_rb;
     private float[] m_samples;
     private float m_initialHeight;
 
@@ -21,6 +25,17 @@ public class ScreamDetector : MonoBehaviour
     void Start()
     {
         m_initialHeight = m_startingPosition.transform.position.y;
+        m_rb = GetComponent<Rigidbody>();
+
+        if (m_type == MotionType.precise)
+        {
+            m_rb.isKinematic = true;
+            m_rb.useGravity = false;
+        }
+        else if (m_type == MotionType.physics)
+        {
+            m_sensitivity += 30;
+        }
 
         m_pData = FindObjectOfType<PersistentData>();
         m_audio = GetComponent<AudioSource>();
@@ -43,12 +58,24 @@ public class ScreamDetector : MonoBehaviour
 
     void Update()
     {
+        Vector3 previousPos = transform.position;
         float vol = GetRMS(0) + GetRMS(1);
         vol *= m_sensitivity;
 
         if (m_pData.m_speed > 0)
         {
-            transform.position = new Vector3(0, m_initialHeight + vol, 0);
+            if (m_type == MotionType.precise)
+            {
+                Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
+                transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime);
+            }
+            else if (m_type == MotionType.physics)
+            {
+                m_rb.isKinematic = false;
+                m_rb.useGravity = true;
+                m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
+            }
+
             //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
         }
         else if (vol > 5)
