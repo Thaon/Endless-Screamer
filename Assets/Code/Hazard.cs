@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Hazard : MonoBehaviour {
 
@@ -25,7 +24,7 @@ public class Hazard : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            m_pData.ResetLevel();
         }
     }
 }
