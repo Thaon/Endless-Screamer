@@ -5,7 +5,8 @@ public class PersistentData : MonoBehaviour {
 
     #region member variables
 
-    public float m_speed = 5;
+    public float m_actualSpeed = 5;
+    public float m_speed = 0;
 
     #endregion
 
@@ -14,8 +15,8 @@ public class PersistentData : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
 	}
 	
-	void Update ()
+	public void StartMovement()
     {
-	
-	}
+        m_speed = m_actualSpeed;
+    }
 }

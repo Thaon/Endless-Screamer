@@ -6,16 +6,18 @@ public class Collectible : MonoBehaviour {
     #region member variables
 
     private float m_speed;
+    private PersistentData m_pData;
 
     #endregion
 
     void Start ()
     {
-        m_speed = FindObjectOfType<PersistentData>().m_speed;
+        m_pData = FindObjectOfType<PersistentData>();
     }
 	
 	void Update ()
     {
+        m_speed = m_pData.m_speed;
         transform.Translate(new Vector3(-1, 0, 0) * m_speed * Time.deltaTime);
     }
 
