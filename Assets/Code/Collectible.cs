@@ -25,6 +25,7 @@ public class Collectible : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            m_pData.m_points++;
             Destroy(this.gameObject);
         }
     }
