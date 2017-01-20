@@ -5,17 +5,18 @@ public class Hazard : MonoBehaviour {
 
     #region member variables
 
-    public float m_speed;
+    private float m_speed;
 
     #endregion
 
-    void Start () {
-	
+    void Start ()
+    {
+        m_speed = FindObjectOfType<PersistentData>().m_speed;
 	}
 	
 	void Update ()
     {
-        transform.Translate(Vector3.left * m_speed * Time.deltaTime);
+        transform.Translate(new Vector3(-1, 0, 0) * m_speed * Time.deltaTime);
 	}
 
     void OnTriggerEnter(Collider other)

@@ -3,7 +3,13 @@ using System.Collections;
 
 public class PersistentData : MonoBehaviour {
 
-	void Start ()
+    #region member variables
+
+    public float m_speed = 5;
+
+    #endregion
+
+    void Start ()
     {
         DontDestroyOnLoad(this.gameObject);
 	}
