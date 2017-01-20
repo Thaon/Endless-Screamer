@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PersistentData : MonoBehaviour {
@@ -10,6 +11,18 @@ public class PersistentData : MonoBehaviour {
     public int m_points = 0;
 
     #endregion
+
+    void Awake()
+    {
+        SceneManager.activeSceneChanged += SceneChanged; // subscribe
+    }
+
+    void SceneChanged(Scene previousScene, Scene newScene)
+    {
+        Debug.Log("active scene changed");
+        GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
+        GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
+    }
 
     void Start ()
     {
