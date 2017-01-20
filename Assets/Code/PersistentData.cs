@@ -24,6 +24,7 @@ public class PersistentData : MonoBehaviour {
     public void ResetLevel()
     {
         m_speed = 0;
+        m_points = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
