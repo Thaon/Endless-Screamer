@@ -44,7 +44,7 @@ public class ScreamDetector : MonoBehaviour
         vol *= m_sensitivity;
 
         transform.position = new Vector3(0, m_initialHeight + vol, 0);
-        //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
+        Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
     }
 
     float GetRMS(int channel)
