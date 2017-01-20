@@ -14,7 +14,7 @@ public class PersistentData : MonoBehaviour {
 
     void Awake()
     {
-        SceneManager.activeSceneChanged += SceneChanged; // subscribe
+        SceneManager.sceneLoaded += SceneChanged; // subscribe
     }
 
     void SceneChanged(Scene previousScene, Scene newScene)
