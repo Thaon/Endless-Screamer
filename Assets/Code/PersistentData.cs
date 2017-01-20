@@ -17,7 +17,7 @@ public class PersistentData : MonoBehaviour {
         SceneManager.sceneLoaded += SceneChanged; // subscribe
     }
 
-    void SceneChanged(Scene previousScene, Scene newScene)
+    void SceneChanged(Scene Scene, LoadSceneMode mode)
     {
         Debug.Log("active scene changed");
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
