@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour {
         {
             GameObject pData = new GameObject("PersistentDataGO");
             pData.AddComponent<PersistentData>();
+            pData.AddComponent<InGameUI>();
         }
 	}
 	

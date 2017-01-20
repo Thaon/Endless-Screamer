@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -19,9 +20,7 @@ public class PersistentData : MonoBehaviour {
 
     void SceneChanged(Scene Scene, LoadSceneMode mode)
     {
-        Debug.Log("active scene changed");
-        GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
-        GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
+        StartCoroutine(UpdateUI());
     }
 
     void Start ()
@@ -39,5 +38,13 @@ public class PersistentData : MonoBehaviour {
         m_speed = 0;
         m_points = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator UpdateUI()
+    {
+        yield return new WaitForSeconds(.1f);
+        Debug.Log("active scene changed");
+        GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
+        GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
     }
 }

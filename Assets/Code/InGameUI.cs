@@ -16,15 +16,19 @@ public class InGameUI : MonoBehaviour {
     {
         m_pData = FindObjectOfType<PersistentData>();
 	}
-	
-	void Update ()
+
+    void Update()
     {
-        m_points.text = m_pData.m_points.ToString();
-        if (m_pData.m_speed > 0)
+        if (m_screamToStartLabel != null && m_points != null)
         {
-            StartGame();
+
+            m_points.text = m_pData.m_points.ToString();
+            if (m_pData.m_speed > 0)
+            {
+                StartGame();
+            }
         }
-	}
+    }
 
     void StartGame()
     {
