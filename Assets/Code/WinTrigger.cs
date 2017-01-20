@@ -5,9 +5,14 @@ public class WinTrigger : MonoBehaviour {
 
     private PersistentData m_pData;
     private float m_speed;
+    public GameObject VictoryLabel;
+    private GameObject player;
+
+
     // Use this for initialization
     void Start () {
         m_pData = FindObjectOfType<PersistentData>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
@@ -20,6 +25,9 @@ public class WinTrigger : MonoBehaviour {
         if (other.tag == "Player") {
             //game end
             Debug.Log("you win!!!");
+            VictoryLabel.SetActive(true);
+            player.GetComponent<ScreamDetector>().enabled = false;
+            m_pData.m_speed = 0;
         }
     }
 }
