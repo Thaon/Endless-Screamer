@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PersistentData : MonoBehaviour {
 
@@ -18,5 +18,11 @@ public class PersistentData : MonoBehaviour {
 	public void StartMovement()
     {
         m_speed = m_actualSpeed;
+    }
+
+    public void ResetLevel()
+    {
+        m_speed = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
