@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class ScreamDetector : MonoBehaviour
+public class ScreamThruster : MonoBehaviour
 {
 
     #region member variables
@@ -13,6 +13,7 @@ public class ScreamDetector : MonoBehaviour
     private AudioSource m_audio;
     private float[] m_samples;
     private float m_initialHeight;
+    private Rigidbody m_rb;
 
     #endregion
 
@@ -21,6 +22,7 @@ public class ScreamDetector : MonoBehaviour
         m_initialHeight = transform.position.y;
 
         m_audio = GetComponent<AudioSource>();
+        m_rb = GetComponent<Rigidbody>();
 
         foreach (string device in Microphone.devices)
         {
@@ -43,7 +45,8 @@ public class ScreamDetector : MonoBehaviour
         float vol = GetRMS(0) + GetRMS(1);
         vol *= m_sensitivity;
 
-        transform.position = new Vector3(0, m_initialHeight + vol, 0);
+        //transform.position = new Vector3(0, m_initialHeight + vol, 0);
+        m_rb.AddForce((Vector3.up * vol) + Vector3.right, ForceMode.Force);
         //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
     }
 
