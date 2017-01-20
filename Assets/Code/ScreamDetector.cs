@@ -49,7 +49,7 @@ public class ScreamDetector : MonoBehaviour
         if (m_pData.m_speed > 0)
         {
             transform.position = new Vector3(0, m_initialHeight + vol, 0);
-            Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
+            //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
         }
         else if (vol > 5)
         {
