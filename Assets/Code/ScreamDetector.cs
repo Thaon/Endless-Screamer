@@ -9,6 +9,7 @@ public class ScreamDetector : MonoBehaviour
     #region member variables
 
     public float m_sensitivity;
+    public GameObject m_startingPosition;
 
     private AudioSource m_audio;
     private float[] m_samples;
@@ -18,7 +19,7 @@ public class ScreamDetector : MonoBehaviour
 
     void Start()
     {
-        m_initialHeight = transform.position.y;
+        m_initialHeight = m_startingPosition.transform.position.y;
 
         m_audio = GetComponent<AudioSource>();
 
