@@ -24,12 +24,14 @@ public class Hazard : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            if (m_pData.shielded)
+            if (m_pData.shielded && gameObject.tag != "NonDestructible")
             {
                 m_pData.shielded = false;
                 Destroy(this.gameObject);
             }
-            else {
+            else
+            {
+
                 m_pData.ResetLevel();
             }
             
