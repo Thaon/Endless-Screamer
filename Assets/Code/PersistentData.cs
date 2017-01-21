@@ -10,8 +10,9 @@ public class PersistentData : MonoBehaviour {
     public float m_actualSpeed = 5;
     public float m_speed = 0;
     public int m_points = 0;
-
     public bool shielded = false;
+
+    private GameObject m_playerExplosion;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class PersistentData : MonoBehaviour {
     void Start ()
     {
         DontDestroyOnLoad(this.gameObject);
+        m_playerExplosion = Resources.Load("PlayerExplosion") as GameObject;
 	}
 	
 	public void StartMovement()
@@ -41,13 +43,18 @@ public class PersistentData : MonoBehaviour {
         if (m_speed != 0)
         {
             m_speed = 0;
+
+            GameObject player = GameObject.FindWithTag("Player");
+            Instantiate(m_playerExplosion, player.transform.position, Quaternion.identity);
+            player.SetActive(false);
+
             StartCoroutine(ResetLevelCO());
         }
     }
 
     IEnumerator UpdateUI()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.001f);
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
         GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
         GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");

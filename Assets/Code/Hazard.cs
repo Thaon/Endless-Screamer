@@ -31,7 +31,7 @@ public class Hazard : MonoBehaviour {
             }
             else if (m_pData.shielded && gameObject.tag == "NonDestructible" || !m_pData.shielded)
             {
-
+                m_pData.shielded = false;
                 m_pData.ResetLevel();
             }
             
