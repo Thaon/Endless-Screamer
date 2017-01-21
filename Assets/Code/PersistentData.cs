@@ -11,6 +11,8 @@ public class PersistentData : MonoBehaviour {
     public float m_speed = 0;
     public int m_points = 0;
 
+    public bool shielded = false;
+
     #endregion
 
     void Awake()

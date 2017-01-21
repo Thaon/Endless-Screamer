@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class Hazard : MonoBehaviour {
+public class Powerup_shield : MonoBehaviour {
 
     #region member variables
 
@@ -9,30 +10,23 @@ public class Hazard : MonoBehaviour {
 
     #endregion
 
-    void Start ()
+    void Start()
     {
         m_pData = FindObjectOfType<PersistentData>();
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
         m_speed = m_pData.m_speed;
         transform.Translate(new Vector3(-1, 0, 0) * m_speed * Time.deltaTime);
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (m_pData.shielded)
-            {
-                m_pData.shielded = false;
-                Destroy(this.gameObject);
-            }
-            else {
-                m_pData.ResetLevel();
-            }
-            
+            m_pData.shielded=true;
+            Destroy(this.gameObject);
         }
     }
 }
