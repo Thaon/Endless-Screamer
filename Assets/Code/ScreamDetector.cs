@@ -2,7 +2,7 @@
 using EZCameraShake;
 using System.Collections;
 
-public enum MotionType { precise, physics };
+public enum MotionType { precise, physics, talk };
 
 [RequireComponent(typeof(AudioSource))]
 
@@ -26,7 +26,8 @@ public class ScreamDetector : MonoBehaviour
 
     void Start()
     {
-        m_initialHeight = m_startingPosition.transform.position.y;
+        if (m_startingPosition != null)
+            m_initialHeight = m_startingPosition.transform.position.y;
         m_rb = GetComponent<Rigidbody>();
 
         if (m_type == MotionType.precise)
@@ -64,26 +65,29 @@ public class ScreamDetector : MonoBehaviour
         vol = GetRMS(0) + GetRMS(1);
         vol *= m_sensitivity;
 
-        if (m_pData.m_speed > 0)
+        if (m_pData != null)
         {
-            if (m_type == MotionType.precise)
+            if (m_pData.m_speed > 0)
             {
-                Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
-                CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.4f, 10, 0, 1);
-                transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
-            }
-            else if (m_type == MotionType.physics)
-            {
-                m_rb.isKinematic = false;
-                m_rb.useGravity = true;
-                m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
-            }
+                if (m_type == MotionType.precise)
+                {
+                    Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
+                    CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.4f, 10, 0, 1);
+                    transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
+                }
+                else if (m_type == MotionType.physics)
+                {
+                    m_rb.isKinematic = false;
+                    m_rb.useGravity = true;
+                    m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
+                }
 
-            Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
-        }
-        else if (vol > 5)
-        {
-            m_pData.StartMovement();
+                //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
+            }
+            else if (vol > 5 && m_type != MotionType.talk)
+            {
+                m_pData.StartMovement();
+            }
         }
     }
 
