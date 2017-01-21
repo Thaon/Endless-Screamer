@@ -15,11 +15,11 @@ public class ScreamDetector : MonoBehaviour
     public GameObject m_startingPosition;
     public MotionType m_type = MotionType.precise;
     public float vol = 0;
+    public float[] m_samples;
 
     private AudioSource m_audio;
     private PersistentData m_pData;
     private Rigidbody m_rb;
-    private float[] m_samples;
     private float m_initialHeight;
 
     #endregion
