@@ -40,7 +40,7 @@ public class WinTrigger : MonoBehaviour {
             player.GetComponent<ScreamDetector>().enabled = false;
             m_pData.m_points *= Mathf.RoundToInt(player.transform.position.y);
             m_pData.m_speed = 0;
-
+            m_pData.GotoMainMenu();
         }
     }
 }

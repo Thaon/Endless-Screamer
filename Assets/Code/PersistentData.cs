@@ -58,9 +58,15 @@ public class PersistentData : MonoBehaviour {
         }
     }
 
+    public void GotoMainMenu()
+    {
+        StartCoroutine(GotoMainMenuCO());
+    }
+
     IEnumerator UpdateUI()
     {
         yield return new WaitForSeconds(.001f);
+        m_points = 0;
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
         GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
         GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");
@@ -76,5 +82,11 @@ public class PersistentData : MonoBehaviour {
         yield return new WaitForSeconds(1);
         m_points = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator GotoMainMenuCO()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("MainMenu");
     }
 }
