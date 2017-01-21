@@ -46,4 +46,8 @@ public class PersistentData : MonoBehaviour {
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
         GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
     }
+
+    public void speedup(float extraSpeed) {
+        m_speed += extraSpeed;
+    }
 }
