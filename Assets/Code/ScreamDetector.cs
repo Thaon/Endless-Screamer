@@ -69,7 +69,7 @@ public class ScreamDetector : MonoBehaviour
             if (m_type == MotionType.precise)
             {
                 Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
-                CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.2f, 10, 0, 1);
+                CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.4f, 10, 0, 1);
                 transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
             }
             else if (m_type == MotionType.physics)
