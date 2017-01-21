@@ -12,6 +12,7 @@ public class PersistentData : MonoBehaviour {
     public int m_points = 0;
     public bool shielded = false;
     public Vector3 targetRotation;
+    private int highScore = 0;
 
     private GameObject m_playerExplosion;
 
@@ -30,6 +31,9 @@ public class PersistentData : MonoBehaviour {
     void Update()
     {
         Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, Quaternion.Euler(targetRotation), 0.1f);
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu")
+            GotoMainMenu();
+        UpdateHighScore();
     }
 
     void Start ()
@@ -37,7 +41,16 @@ public class PersistentData : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         m_playerExplosion = Resources.Load("PlayerExplosion") as GameObject;
 	}
-	
+
+    void UpdateHighScore() {
+        if (m_points > highScore) {
+            highScore = m_points;
+        }
+        if (GameObject.FindGameObjectWithTag("HighScore")!= null) {
+            GameObject.FindGameObjectWithTag("HighScore").GetComponent<Text>().text = "High Score: " + highScore.ToString();
+        }
+    }
+
 	public void StartMovement()
     {
         m_speed = m_actualSpeed;
@@ -81,6 +94,7 @@ public class PersistentData : MonoBehaviour {
     {
         yield return new WaitForSeconds(1);
         m_points = 0;
+        targetRotation = new Vector3(0, 0, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
