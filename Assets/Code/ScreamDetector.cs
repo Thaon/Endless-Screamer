@@ -17,6 +17,7 @@ public class ScreamDetector : MonoBehaviour
     public float vol = 0;
     public float m_offset;
     public float[] m_samples;
+    public GameObject m_notes;
 
     private AudioSource m_audio;
     private PersistentData m_pData;
@@ -90,6 +91,7 @@ public class ScreamDetector : MonoBehaviour
             else if (vol > 5 && m_type != MotionType.talk)
             {
                 m_pData.StartMovement();
+                m_notes.SetActive(true);
             }
         }
     }
