@@ -15,6 +15,7 @@ public class ScreamDetector : MonoBehaviour
     public GameObject m_startingPosition;
     public MotionType m_type = MotionType.precise;
     public float vol = 0;
+    public float m_offset;
     public float[] m_samples;
 
     private AudioSource m_audio;
@@ -63,7 +64,7 @@ public class ScreamDetector : MonoBehaviour
     {
         Vector3 previousPos = transform.position;
         vol = GetRMS(0) + GetRMS(1);
-        vol *= m_sensitivity;
+        vol *= m_sensitivity - m_offset;
 
         if (m_pData != null)
         {
@@ -71,7 +72,7 @@ public class ScreamDetector : MonoBehaviour
             {
                 if (m_type == MotionType.precise)
                 {
-                    Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
+                    Vector3 nextPos = new Vector3(0, m_initialHeight + vol + m_offset, 0);
                     CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.4f, 10, 0, 1);
                     transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
                 }
@@ -82,7 +83,7 @@ public class ScreamDetector : MonoBehaviour
                     m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
                 }
 
-                //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
+                Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
             }
             else if (vol > 5 && m_type != MotionType.talk)
             {
