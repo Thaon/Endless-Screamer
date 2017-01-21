@@ -38,9 +38,11 @@ public class PersistentData : MonoBehaviour {
 
     public void ResetLevel()
     {
-        m_speed = 0;
-        m_points = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (m_speed != 0)
+        {
+            m_speed = 0;
+            StartCoroutine(ResetLevelCO());
+        }
     }
 
     IEnumerator UpdateUI()
@@ -53,5 +55,12 @@ public class PersistentData : MonoBehaviour {
 
     public void speedup(float extraSpeed) {
         m_speed += extraSpeed;
+    }
+
+    IEnumerator ResetLevelCO()
+    {
+        yield return new WaitForSeconds(1);
+        m_points = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
