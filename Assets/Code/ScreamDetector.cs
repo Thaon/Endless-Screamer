@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using EZCameraShake;
 using System.Collections;
 
 public enum MotionType { precise, physics };
@@ -68,6 +69,7 @@ public class ScreamDetector : MonoBehaviour
             if (m_type == MotionType.precise)
             {
                 Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
+                CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.2f, 10, 0, 1);
                 transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
             }
             else if (m_type == MotionType.physics)
@@ -77,7 +79,7 @@ public class ScreamDetector : MonoBehaviour
                 m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
             }
 
-            //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
+            Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
         }
         else if (vol > 5)
         {
