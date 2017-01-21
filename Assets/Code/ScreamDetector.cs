@@ -68,11 +68,14 @@ public class ScreamDetector : MonoBehaviour
 
         if (m_pData != null)
         {
+
+            Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone
+
             if (m_pData.m_speed > 0)
             {
                 if (m_type == MotionType.precise)
                 {
-                    Vector3 nextPos = new Vector3(0, m_initialHeight + vol + m_offset, 0);
+                    Vector3 nextPos = new Vector3(0, m_initialHeight + vol * 2, 0);
                     CameraShaker.Instance.ShakeOnce((vol / m_sensitivity) - 0.4f, 10, 0, 1);
                     transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
                 }
@@ -83,7 +86,6 @@ public class ScreamDetector : MonoBehaviour
                     m_rb.AddForce(Vector3.up * vol, ForceMode.Acceleration);
                 }
 
-                Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone	    
             }
             else if (vol > 5 && m_type != MotionType.talk)
             {
