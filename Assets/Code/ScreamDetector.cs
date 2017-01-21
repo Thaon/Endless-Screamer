@@ -13,6 +13,7 @@ public class ScreamDetector : MonoBehaviour
     public float m_sensitivity;
     public GameObject m_startingPosition;
     public MotionType m_type = MotionType.precise;
+    public float vol = 0;
 
     private AudioSource m_audio;
     private PersistentData m_pData;
@@ -59,7 +60,7 @@ public class ScreamDetector : MonoBehaviour
     void Update()
     {
         Vector3 previousPos = transform.position;
-        float vol = GetRMS(0) + GetRMS(1);
+        vol = GetRMS(0) + GetRMS(1);
         vol *= m_sensitivity;
 
         if (m_pData.m_speed > 0)
@@ -67,7 +68,7 @@ public class ScreamDetector : MonoBehaviour
             if (m_type == MotionType.precise)
             {
                 Vector3 nextPos = new Vector3(0, m_initialHeight + vol, 0);
-                transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime);
+                transform.position = Vector3.Lerp(previousPos, nextPos, Time.deltaTime * 2);
             }
             else if (m_type == MotionType.physics)
             {
