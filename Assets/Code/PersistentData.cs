@@ -11,6 +11,7 @@ public class PersistentData : MonoBehaviour {
     public float m_speed = 0;
     public int m_points = 0;
     public bool shielded = false;
+    public Vector3 targetRotation;
 
     private GameObject m_playerExplosion;
 
@@ -24,6 +25,11 @@ public class PersistentData : MonoBehaviour {
     void SceneChanged(Scene Scene, LoadSceneMode mode)
     {
         StartCoroutine(UpdateUI());
+    }
+
+    void Update()
+    {
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, Quaternion.Euler(targetRotation), 0.1f);
     }
 
     void Start ()
@@ -58,6 +64,7 @@ public class PersistentData : MonoBehaviour {
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
         GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
         GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");
+        targetRotation = new Vector3(0, 0, 0);
     }
 
     public void speedup(float extraSpeed) {
