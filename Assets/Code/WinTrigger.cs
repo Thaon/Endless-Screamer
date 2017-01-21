@@ -6,7 +6,7 @@ public class WinTrigger : MonoBehaviour {
     private PersistentData m_pData;
     private float m_speed;
     public GameObject VictoryLabel;
-    public GameObject screamAgainButton;
+    public GameObject screamAgain;
     private GameObject player;
 
 
@@ -25,10 +25,20 @@ public class WinTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             //game end
+            screamAgain.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            //game end
             Debug.Log("you win!!!");
             VictoryLabel.SetActive(true);
-            screamAgainButton.SetActive(true);
+            screamAgain.SetActive(false);
             player.GetComponent<ScreamDetector>().enabled = false;
+            m_pData.m_points *= Mathf.RoundToInt(player.transform.position.y);
             m_pData.m_speed = 0;
 
         }

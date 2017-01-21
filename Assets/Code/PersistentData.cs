@@ -33,6 +33,7 @@ public class PersistentData : MonoBehaviour {
 	public void StartMovement()
     {
         m_speed = m_actualSpeed;
+        GameObject.Find("Music").GetComponent<AudioSource>().Play();
     }
 
     public void ResetLevel()
