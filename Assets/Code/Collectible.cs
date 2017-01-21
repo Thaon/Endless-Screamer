@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using EZCameraShake;
 
 public class Collectible : MonoBehaviour {
 
@@ -25,6 +26,7 @@ public class Collectible : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            CameraShaker.Instance.ShakeOnce(5, 10, 0, 2);
             m_pData.m_points++;
             Destroy(this.gameObject);
         }
