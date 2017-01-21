@@ -36,8 +36,8 @@ public class BackgroundVisuals : MonoBehaviour {
         {
             for (int i = 0; i < m_lines; i++)
             {
-                m_renderers[i].SetPosition(0, new Vector3(m_linesStartPosition.transform.position.x + (i / 10.0f), m_linesStartPosition.transform.position.y, m_linesStartPosition.transform.position.z));
-                m_renderers[i].SetPosition(1, new Vector3(m_linesStartPosition.transform.position.x + (i / 10.0f), m_linesStartPosition.transform.position.y + m_sd.m_samples[i] * 20, m_linesStartPosition.transform.position.z));
+                m_renderers[i].SetPosition(0, new Vector3(m_linesStartPosition.transform.position.x + (i / 10.0f), m_linesStartPosition.transform.position.y, m_linesStartPosition.transform.position.z + 2));
+                m_renderers[i].SetPosition(1, new Vector3(m_linesStartPosition.transform.position.x + (i / 10.0f), m_linesStartPosition.transform.position.y + m_sd.m_samples[i] * 20, m_linesStartPosition.transform.position.z + 2));
             }
         }
 	}

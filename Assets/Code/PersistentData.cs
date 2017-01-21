@@ -48,6 +48,7 @@ public class PersistentData : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
         GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
         GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
+        GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");
     }
 
     public void speedup(float extraSpeed) {
