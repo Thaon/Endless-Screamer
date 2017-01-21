@@ -6,6 +6,7 @@ public class WinTrigger : MonoBehaviour {
     private PersistentData m_pData;
     private float m_speed;
     public GameObject VictoryLabel;
+    public GameObject screamAgainButton;
     private GameObject player;
 
 
@@ -26,8 +27,10 @@ public class WinTrigger : MonoBehaviour {
             //game end
             Debug.Log("you win!!!");
             VictoryLabel.SetActive(true);
+            screamAgainButton.SetActive(true);
             player.GetComponent<ScreamDetector>().enabled = false;
             m_pData.m_speed = 0;
+
         }
     }
 }
