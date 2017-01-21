@@ -29,7 +29,7 @@ public class Hazard : MonoBehaviour {
                 m_pData.shielded = false;
                 Destroy(this.gameObject);
             }
-            else
+            else if (m_pData.shielded && gameObject.tag == "NonDestructible" || !m_pData.shielded)
             {
 
                 m_pData.ResetLevel();
