@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using EZCameraShake;
 
 public class Hazard : MonoBehaviour {
 
@@ -27,11 +28,13 @@ public class Hazard : MonoBehaviour {
             if (m_pData.shielded && gameObject.tag != "NonDestructible")
             {
                 m_pData.shielded = false;
+                CameraShaker.Instance.ShakeOnce(3, 10, 0, 1);
                 Destroy(this.gameObject);
             }
             else if (m_pData.shielded && gameObject.tag == "NonDestructible" || !m_pData.shielded)
             {
                 m_pData.shielded = false;
+                CameraShaker.Instance.ShakeOnce(5, 10, 0, 1);
                 m_pData.ResetLevel();
             }
             
