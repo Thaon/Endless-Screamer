@@ -73,11 +73,6 @@ public class PersistentData : MonoBehaviour {
             Instantiate(m_playerExplosion, player.transform.position, Quaternion.identity);
             player.SetActive(false);
 
-            //spawn audio object
-            GameObject obj = new GameObject();
-            obj.AddComponent<PlaySoundOnDestruction>();
-            obj.GetComponent<AudioSource>().clip = m_soundToPlay;
-
             StartCoroutine(ResetLevelCO());
         }
     }
