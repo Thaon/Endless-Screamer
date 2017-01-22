@@ -6,8 +6,6 @@ using System.Collections;
 
 public class PlaySoundOnCollision : MonoBehaviour {
 
-    public AudioClip m_soundToPlay;
-
     private AudioSource m_audio;
 
     void Start()
