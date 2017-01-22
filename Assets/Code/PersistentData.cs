@@ -25,7 +25,11 @@ public class PersistentData : MonoBehaviour {
 
     void SceneChanged(Scene Scene, LoadSceneMode mode)
     {
-        StartCoroutine(UpdateUI());
+        m_points = 0;
+        GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
+        GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
+        GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");
+        targetRotation = new Vector3(0, 0, 0);
     }
 
     void Update()
@@ -74,16 +78,6 @@ public class PersistentData : MonoBehaviour {
     public void GotoMainMenu()
     {
         StartCoroutine(GotoMainMenuCO());
-    }
-
-    IEnumerator UpdateUI()
-    {
-        yield return new WaitForSeconds(.001f);
-        m_points = 0;
-        GetComponent<InGameUI>().m_screamToStartLabel = GameObject.Find("ScreamText");
-        GetComponent<InGameUI>().m_points = GameObject.Find("Points").GetComponent<Text>();
-        GetComponent<BackgroundVisuals>().m_linesStartPosition = GameObject.Find("LineStart");
-        targetRotation = new Vector3(0, 0, 0);
     }
 
     public void speedup(float extraSpeed) {

@@ -70,7 +70,7 @@ public class ScreamDetector : MonoBehaviour
         if (m_pData != null)
         {
 
-            Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone
+            //Debug.Log("Vol:" + vol); // the actual intensity/ volume of the sound from the microphone
 
             if (m_pData.m_speed > 0)
             {
