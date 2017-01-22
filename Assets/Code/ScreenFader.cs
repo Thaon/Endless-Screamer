@@ -11,7 +11,7 @@ public class ScreenFader : MonoBehaviour {
 
     #endregion
 
-    void Start ()
+    void Awake ()
     {
         m_screenQuad = GetComponent<Image>();
         m_color = m_screenQuad.color;
@@ -29,7 +29,7 @@ public class ScreenFader : MonoBehaviour {
     }
 
     public void SetRealAlpha(byte alpha) {
-        m_color.a = 1;
+        m_color.a = alpha;
         m_screenQuad.color = m_color;
             
     }

@@ -37,6 +37,8 @@ public class PersistentData : MonoBehaviour {
         Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, Quaternion.Euler(targetRotation), 0.1f);
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainMenu")
             GotoMainMenu();
+        else if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "MainMenu")
+            Application.Quit();
         UpdateHighScore();
     }
 
