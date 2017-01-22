@@ -18,13 +18,5 @@ public class PlaySoundOnCollision : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         m_audio.Play();
-        StartCoroutine(PlayAndDie());
     }
-
-    IEnumerator PlayAndDie()
-    {
-        yield return new WaitForSeconds(m_audio.clip.length);
-        Destroy(this.gameObject);
-    }
-
 }
