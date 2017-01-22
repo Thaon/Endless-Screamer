@@ -11,6 +11,7 @@ public class PlaySoundAndDie : MonoBehaviour {
     void Start ()
     {
         m_audio = GetComponent<AudioSource>();
+        m_audio.Play();
 
     }
 	
