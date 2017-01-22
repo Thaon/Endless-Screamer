@@ -6,6 +6,8 @@ public class SpalshScreenTransition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GameObject.Find("ScreenFader").GetComponent<ScreenFader>().SetRealAlpha(1);
+        GameObject.Find("ScreenFader").GetComponent<ScreenFader>().SetAlpha(0);
         StartCoroutine(WaitAndChangeScene());
 	}
 	
@@ -15,7 +17,7 @@ public class SpalshScreenTransition : MonoBehaviour {
 	}
 
     IEnumerator WaitAndChangeScene() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MainMenu");
     }
 }

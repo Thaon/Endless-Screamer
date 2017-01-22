@@ -27,4 +27,10 @@ public class ScreenFader : MonoBehaviour {
     {
         m_color.a = alpha;
     }
+
+    public void SetRealAlpha(byte alpha) {
+        m_color.a = 1;
+        m_screenQuad.color = m_color;
+            
+    }
 }
