@@ -76,6 +76,7 @@ public class PersistentData : MonoBehaviour {
 
     public void GotoMainMenu()
     {
+        GameObject.Find("ScreenFader").GetComponent<ScreenFader>().SetAlpha(1);
         StartCoroutine(GotoMainMenuCO());
     }
 
