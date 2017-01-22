@@ -4,7 +4,9 @@ using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 
-public class PlaySoundOnDestruction : MonoBehaviour {
+public class PlaySoundOnCollision : MonoBehaviour {
+
+    public AudioClip m_soundToPlay;
 
     private AudioSource m_audio;
 
@@ -13,9 +15,16 @@ public class PlaySoundOnDestruction : MonoBehaviour {
         m_audio = GetComponent<AudioSource>();
     }
 
-	IEnumerator PlayAndDie ()
+    void OnTriggerEnter(Collider other)
+    {
+        m_audio.Play();
+        StartCoroutine(PlayAndDie());
+    }
+
+    IEnumerator PlayAndDie()
     {
         yield return new WaitForSeconds(m_audio.clip.length);
         Destroy(this.gameObject);
-	}
+    }
+
 }
