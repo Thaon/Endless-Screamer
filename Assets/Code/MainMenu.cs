@@ -5,8 +5,9 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 
     private bool m_loading = false;
+    private AudioSource m_sfx;
 
-	void Start ()
+    void Start ()
     {
 	    if (!GameObject.Find("PersistentDataGO"))
         {
@@ -14,9 +15,11 @@ public class MainMenu : MonoBehaviour {
             pData.AddComponent<PersistentData>();
             pData.AddComponent<InGameUI>();
         }
-	}
-	
-	public void GotoGame()
+        m_sfx = GetComponent<AudioSource>();
+
+    }
+
+    public void GotoGame()
     {
         if(!m_loading)
         {
@@ -30,6 +33,7 @@ public class MainMenu : MonoBehaviour {
         if (!m_loading)
         {
             GameObject.Find("ScreenFader").GetComponent<ScreenFader>().SetAlpha(1);
+            m_sfx.Play();
             StartCoroutine(GotoGameCO());
         }
     }

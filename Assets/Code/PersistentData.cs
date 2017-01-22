@@ -15,6 +15,7 @@ public class PersistentData : MonoBehaviour {
     private int highScore = 0;
 
     private GameObject m_playerExplosion;
+    private AudioClip m_soundToPlay;
 
     #endregion
 
@@ -43,7 +44,9 @@ public class PersistentData : MonoBehaviour {
     {
         DontDestroyOnLoad(this.gameObject);
         m_playerExplosion = Resources.Load("PlayerExplosion") as GameObject;
-	}
+        m_soundToPlay = Resources.Load("Explosion") as AudioClip;
+
+    }
 
     void UpdateHighScore() {
         if (m_points > highScore) {
@@ -69,6 +72,11 @@ public class PersistentData : MonoBehaviour {
             GameObject player = GameObject.FindWithTag("Player");
             Instantiate(m_playerExplosion, player.transform.position, Quaternion.identity);
             player.SetActive(false);
+
+            //spawn audio object
+            GameObject obj = new GameObject();
+            obj.AddComponent<PlaySoundOnDestruction>();
+            obj.GetComponent<AudioSource>().clip = m_soundToPlay;
 
             StartCoroutine(ResetLevelCO());
         }
